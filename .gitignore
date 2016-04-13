@@ -63,3 +63,6 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+
+# Google App Engine generated folder
+appengine-generated/
