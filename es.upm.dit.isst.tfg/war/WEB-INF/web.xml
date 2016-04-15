@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns="http://java.sun.com/xml/ns/javaee"
-xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
 
 	<!-- /myTFGs -->
 	<servlet>
@@ -14,7 +14,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>MyTFGsServlet</servlet-name>
 		<url-pattern>/myTFGs</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- /newTFG -->
 	<servlet>
 		<servlet-name>NewTFGServlet</servlet-name>
@@ -24,8 +24,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>NewTFGServlet</servlet-name>
 		<url-pattern>/newTFG</url-pattern>
 	</servlet-mapping>
-	
-	<!--  /accept -->
+
+	<!-- /accept -->
 	<servlet>
 		<servlet-name>AcceptTFGServlet</servlet-name>
 		<servlet-class>es.upm.dit.isst.tfg.AcceptTFGServlet</servlet-class>
@@ -34,8 +34,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>AcceptTFGServlet</servlet-name>
 		<url-pattern>/accept</url-pattern>
 	</servlet-mapping>
-	
-	<!--  /file -->
+
+	<!-- /acceptViaEmail -->
+	<servlet>
+		<servlet-name>AcceptTFGViaEmailServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.AcceptTFGViaEmailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcceptTFGViaEmailServlet</servlet-name>
+		<url-pattern>/_ah/mail/tfg@isst‐tfg.appspotmail.com</url-pattern>
+	</servlet-mapping>
+
+	<!-- /file -->
 	<servlet>
 		<servlet-name>FileServlet</servlet-name>
 		<servlet-class>es.upm.dit.isst.tfg.FileServlet</servlet-class>
@@ -44,7 +54,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>FileServlet</servlet-name>
 		<url-pattern>/file</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- /index -->
 	<servlet>
 		<servlet-name>IndexServlet</servlet-name>
@@ -57,4 +67,23 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<welcome-file-list>
 		<welcome-file>index</welcome-file>
 	</welcome-file-list>
+
+	<!-- /clean -->
+	<servlet>
+		<servlet-name>CleanTFGsServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.CleanTFGsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CleanTFGsServlet</servlet-name>
+		<url-pattern>/clean</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>cron</web-resource-name>
+			<url-pattern>/clean</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
 </web-app>
