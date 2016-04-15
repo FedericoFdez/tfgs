@@ -9,12 +9,8 @@
 <title>Sistema de gestión de TFGs</title>
 </head>
 <body>
-	<p>Sistema de gestión de TFGs</p>
-	<c:if test="${user}">
-		<c:out value="${user}" />
-	</c:if>
-	<p>Puedes pulsar el siguiente enlace para salir
-		<a href="<c:url value="${url}" />"><c:out value="${urlLinkText}" /></a>
-	</p>
+	<jsp:include page="header.jsp" />
+	<h3>¡Bienvenido!</h3>
+	<h3>Empiece por <a href="<c:url value="${loginURL}" />">iniciar sesión</a>.</h3>
 </body>
 </html>

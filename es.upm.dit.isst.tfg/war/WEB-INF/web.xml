@@ -4,23 +4,57 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+	<!-- /myTFGs -->
 	<servlet>
-		<servlet-name>Es_upm_dit_isst_tfg</servlet-name>
-		<servlet-class>es.upm.dit.isst.tfg.Es_upm_dit_isst_tfgServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>es.upm.dit.isst.tfg.LoginServlet</servlet-class>
+		<servlet-name>MyTFGsServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.MyTFGsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Es_upm_dit_isst_tfg</servlet-name>
-		<url-pattern>/es_upm_dit_isst_tfg</url-pattern>
+		<servlet-name>MyTFGsServlet</servlet-name>
+		<url-pattern>/myTFGs</url-pattern>
 	</servlet-mapping>
+	
+	<!-- /newTFG -->
+	<servlet>
+		<servlet-name>NewTFGServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.NewTFGServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/login</url-pattern>
+		<servlet-name>NewTFGServlet</servlet-name>
+		<url-pattern>/newTFG</url-pattern>
+	</servlet-mapping>
+	
+	<!--  /accept -->
+	<servlet>
+		<servlet-name>AcceptTFGServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.AcceptTFGServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AcceptTFGServlet</servlet-name>
+		<url-pattern>/accept</url-pattern>
+	</servlet-mapping>
+	
+	<!--  /file -->
+	<servlet>
+		<servlet-name>FileServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.FileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileServlet</servlet-name>
+		<url-pattern>/file</url-pattern>
+	</servlet-mapping>
+	
+	<!-- /index -->
+	<servlet>
+		<servlet-name>IndexServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.IndexServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IndexServlet</servlet-name>
+		<url-pattern>/index</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>index</welcome-file>
 	</welcome-file-list>
 </web-app>

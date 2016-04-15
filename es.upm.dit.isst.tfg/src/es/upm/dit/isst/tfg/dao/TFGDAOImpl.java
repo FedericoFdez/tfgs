@@ -55,7 +55,9 @@ public class TFGDAOImpl implements TFGDAO {
 		
 		em.close();
 		
-		return tfgs.get(0);
+		if (tfgs.size() != 0)
+			return tfgs.get(0);
+		else return null;
 	}
 
 	/* (non-Javadoc)
