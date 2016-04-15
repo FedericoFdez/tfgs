@@ -16,7 +16,7 @@ import es.upm.dit.isst.tfg.dao.TFGDAO;
 import es.upm.dit.isst.tfg.dao.TFGDAOImpl;
 import es.upm.dit.isst.tfg.model.TFG;
 
-public class AcceptTFGViaEmail extends HttpServlet {
+public class AcceptTFGViaEmailServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
