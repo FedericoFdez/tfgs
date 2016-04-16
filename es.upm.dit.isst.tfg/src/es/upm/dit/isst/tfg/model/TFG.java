@@ -8,12 +8,15 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.json.simple.JSONAware;
+import org.json.simple.JSONObject;
+
 /**
  * @author Federico A. Fernandez Moreno
  *
  */
 @Entity
-public class TFG implements Serializable {
+public class TFG implements Serializable, JSONAware {
 
 	// since it is Serializable
 	private static final long serialVersionUID = 13552091624950200L;
@@ -36,8 +39,8 @@ public class TFG implements Serializable {
 		this.file = file;
 		this.status = status;
 	}
-	
-	public TFG(String author, String title, String summary){
+
+	public TFG(String author, String title, String summary) {
 		this.author = author;
 		this.title = title;
 		this.summary = summary;
@@ -148,6 +151,19 @@ public class TFG implements Serializable {
 	 */
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toJSONString() {
+		JSONObject obj = new JSONObject();
+		obj.put("author", this.author);
+		obj.put("title", this.title);
+		obj.put("summary", this.summary);
+		obj.put("tutor", this.tutor);
+		obj.put("secretary", this.secretary);
+		obj.put("file", this.file);
+		obj.put("status", this.status);
+		return obj.toString();
 	}
 
 }

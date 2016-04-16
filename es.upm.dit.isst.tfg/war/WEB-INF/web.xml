@@ -86,4 +86,24 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 			<role-name>admin</role-name>
 		</auth-constraint>
 	</security-constraint>
+	
+	<!-- /TFGsAPI -->
+	<servlet>
+		<servlet-name>TFGsAPIServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.TFGsAPIServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TFGsAPIServlet</servlet-name>
+		<url-pattern>/TFGsAPI</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>TFGsAPIServlet</web-resource-name>
+			<url-pattern>/TFGsAPI</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
 </web-app>
