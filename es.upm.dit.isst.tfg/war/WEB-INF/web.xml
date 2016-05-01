@@ -44,6 +44,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>AcceptTFGViaEmailServlet</servlet-name>
 		<url-pattern>/_ah/mail/tfg@isst‐tfg.appspotmail.com</url-pattern>
 	</servlet-mapping>
+	
+	<!-- /reject -->
+	<servlet>
+		<servlet-name>RejectTFGServlet</servlet-name>
+		<servlet-class>es.upm.dit.isst.tfg.RejectTFGServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RejectTFGServlet</servlet-name>
+		<url-pattern>/reject</url-pattern>
+	</servlet-mapping>
 
 	<!-- /file -->
 	<servlet>

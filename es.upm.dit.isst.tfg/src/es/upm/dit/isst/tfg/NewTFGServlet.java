@@ -24,7 +24,7 @@ public class NewTFGServlet extends HttpServlet {
 			String tutor = req.getParameter("tutor");
 			TFGDAO dao = TFGDAOImpl.getInstance();
 			dao.createTFG((String)req.getSession().getAttribute("username"), title,
-					summary, tutor, "", "", 1);
+					summary, tutor, "", "", 1, false);
 			resp.sendRedirect("myTFGs");
 		} else {
 			resp.sendRedirect("myTFGs?error=Solicitud%20Incorrecta,%20por%20favor%20prueba%20de%20nuevo");

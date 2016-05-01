@@ -10,13 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -36,38 +33,58 @@ public class AcceptTFGServlet extends HttpServlet {
 		String username = (String) req.getSession().getAttribute("username");
 		String author = tfg.getAuthor();
 
-		if (role.equals("tutor") && data.containsKey("secretary")) {
-			String secretary = req.getParameter("secretary");
-			tfg.setSecretary(secretary);
-			tfg.setStatus(2);
-			dao.updateTFG(tfg);
+		switch (tfg.getStatus()) {
+		case 1:
+			if (role.equals("tutor") && data.containsKey("secretary")) {
+				String secretary = req.getParameter("secretary");
+				tfg.setSecretary(secretary);
+				tfg.setStatus(2);
+				dao.updateTFG(tfg);
 
-			String subject = "El profesor " + username
-					+ "acepta actuar como tutor del TFG.";
-			String text = "El profesor " + username
-					+ "acepta actuar como tutor del TFG propuesto por "
-					+ tfg.getAuthor() + "con título " + tfg.getTitle();
+				String subject = "El profesor " + username
+						+ "acepta actuar como tutor del TFG.";
+				String text = "El profesor " + username
+						+ "acepta actuar como tutor del TFG propuesto por "
+						+ tfg.getAuthor() + "con título " + tfg.getTitle();
 
-			sendMail(author, subject, text);
+				sendMail(author, subject, text);
+				break;
+			} else{
+				resp.sendRedirect("myTFGs?error=Solicitud%20Incorrecta,%20por%20favor%20prueba%20de%20nuevo");
+				return;
+			}
+		case 3:
+			if (role.equals("tutor")) {
+				tfg.setStatus(4);
+				dao.updateTFG(tfg);
 
-			resp.sendRedirect("myTFGs");
-		} else if (role.equals("secretary")) {
-			tfg.setStatus(4);
-			dao.updateTFG(tfg);
+				String subject = "El profesor " + username
+						+ "acepta la memoria del TFG.";
+				String text = "El profesor " + username
+						+ "acepta la memoria del TFG propuesto por "
+						+ tfg.getAuthor() + "con título " + tfg.getTitle();
 
-			String subject = "El secretario " + username
-					+ "ha calificado el TFG.";
-			String text = "El secretario " + username
-					+ "ha calificado el TFG propuesto por " + tfg.getAuthor()
-					+ "con título " + tfg.getTitle() + "y tutorizado por "
-					+ tfg.getTutor();
+				sendMail(author, subject, text);
+			}
+			break;
+		case 4:
+			if (role.equals("secretary")) {
+				tfg.setStatus(5);
+				dao.updateTFG(tfg);
 
-			sendMail(author, subject, text);
-			sendMail(tfg.getTutor(), subject, text);
+				String subject = "El secretario " + username
+						+ "ha calificado el TFG.";
+				String text = "El secretario " + username
+						+ "ha calificado el TFG propuesto por "
+						+ tfg.getAuthor() + "con título " + tfg.getTitle()
+						+ "y tutorizado por " + tfg.getTutor();
 
-			resp.sendRedirect("myTFGs");
-		} else
-			resp.sendRedirect("myTFGs?error=Solicitud%20Incorrecta,%20por%20favor%20prueba%20de%20nuevo");
+				sendMail(author, subject, text);
+				sendMail(tfg.getTutor(), subject, text);
+			}
+			break;
+		}
+		resp.sendRedirect("myTFGs");
 	}
 
 	@Override

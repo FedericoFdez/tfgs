@@ -33,10 +33,10 @@ public class TFGDAOImpl implements TFGDAO {
 	 */
 	@Override
 	public void createTFG(String author, String title, String summary,
-			String tutor, String secretary, String file, int status) {
+			String tutor, String secretary, String file, int status, boolean rejected) {
 		EntityManager em = EMFService.get().createEntityManager();
 		
-		TFG tfg = new TFG(author, title, summary, tutor, secretary, file, status);
+		TFG tfg = new TFG(author, title, summary, tutor, secretary, file, status, rejected);
 		em.persist(tfg);
 		
 		em.close();

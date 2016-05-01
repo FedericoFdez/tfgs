@@ -36,7 +36,7 @@ public class FileServlet extends HttpServlet {
 			tfg.setFile(blobKeys.get(0).getKeyString());
 			tfg.setStatus(3);
 			dao.updateTFG(tfg);
-			resp.sendRedirect("myTFGs");
+			resp.sendRedirect("/myTFGs");
 		}
 	}
 

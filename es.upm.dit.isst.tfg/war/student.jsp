@@ -14,8 +14,8 @@
 
 <p>Perfil: alumno.</p>
 <c:choose>
-	<c:when test="${tfg!=null}">
-		<p>Estado de su solicitud: ${tfg.status}</p>
+	<c:when test="${tfg != null}">
+		<p>Estado de su solicitud: ${tfg.status}<c:if test="${tfg.rejected == true }"> (RECHAZADO)</c:if></p>
 		<table>
 			<tr>
 				<th>Autor</th>
@@ -35,7 +35,7 @@
 				<td><c:out value="${tfg.status}" /></td>
 				<td><c:choose>
 						<c:when test="${tfg.status lt 2}">Sin memoria</c:when>
-						<c:when test="${tfg.status==2}">
+						<c:when test="${tfg.status==2 and tfg.rejected==false}">
 							<form action="<%=blobstoreService.createUploadUrl("/file")%>"
 								method="post" enctype="multipart/form-data">
 								<input id="author" name="author" type="hidden"
@@ -50,6 +50,9 @@
 									value="Mostrar memoria" />
 							</form>
 						</c:when>
+						<c:otherwise>
+							
+						</c:otherwise>
 					</c:choose></td>
 			</tr>
 		</table>

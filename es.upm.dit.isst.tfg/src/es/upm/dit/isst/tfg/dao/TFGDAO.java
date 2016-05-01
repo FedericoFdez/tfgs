@@ -15,7 +15,7 @@ public interface TFGDAO {
 	
 	//CREATE methods
 	public void createTFG(String author, String title, String summary,
-			String tutor, String secretary, String file, int status);
+			String tutor, String secretary, String file, int status, boolean rejected);
 
 	//READ methods
 	public TFG getTFG(String author);

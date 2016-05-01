@@ -25,9 +25,10 @@ public class TFG implements Serializable {
 	private String secretary;
 	private String file;
 	private int status;
+	private boolean rejected;
 
 	public TFG(String author, String title, String summary, String tutor,
-			String secretary, String file, int status) {
+			String secretary, String file, int status, boolean rejected) {
 		this.author = author;
 		this.title = title;
 		this.summary = summary;
@@ -35,13 +36,7 @@ public class TFG implements Serializable {
 		this.secretary = secretary;
 		this.file = file;
 		this.status = status;
-	}
-	
-	public TFG(String author, String title, String summary){
-		this.author = author;
-		this.title = title;
-		this.summary = summary;
-		this.status = 1;
+		this.rejected = rejected;
 	}
 
 	/**
@@ -92,6 +87,14 @@ public class TFG implements Serializable {
 	 */
 	public int getStatus() {
 		return status;
+	}
+	
+	/**
+	 * 
+	 * @return whether it's rejected
+	 */
+	public boolean isRejected() {
+		return rejected;
 	}
 
 	/**
@@ -148,6 +151,14 @@ public class TFG implements Serializable {
 	 */
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	
+	/**
+	 * @param rejected
+	 * 			  the rejected to set
+	 */
+	public void setRejected(boolean rejected) {
+		this.rejected = rejected;
 	}
 
 }

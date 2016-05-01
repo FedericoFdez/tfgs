@@ -17,25 +17,55 @@
 		</tr>
 		<c:forEach items="${tfgsAsTutor}" var="tfg">
 			<tr>
-				<td><c:out value="${tfg.status}" /></td>
+				<td><c:out value="${tfg.status}" /><c:if test="${tfg.rejected == true}"> (R)</c:if></td>
 				<td><c:out value="${tfg.author}" /></td>
 				<td><c:out value="${tfg.title}" /></td>
 				<td><c:out value="${tfg.summary}" /></td>
 
 				<c:choose>
 					<c:when test="${tfg.status == 1}">
-						<form action="/accept?role=tutor" method="post" acceptcharset="utf-8">
-							<td><input type="text" name="secretary" id="secretary"
-								maxLength="255" size="20" required placeholder="secretary" /></td>
-							<td><input type="hidden" name="author" value="${tfg.author}" />
-								<input type="submit" value="Aceptar como tutor" /></td>
-						</form>
+						<c:if test="${tfg.rejected == false }">
+							<form action="/accept?role=tutor" method="post" acceptcharset="utf-8">
+								<td><input type="text" name="secretary" id="secretary"
+									maxLength="255" size="20" required placeholder="secretary" /></td>
+								<td><input type="hidden" name="author" value="${tfg.author}" />
+									<input type="submit" value="Aceptar como tutor" />
+							</form>
+							<form action="/reject?role=tutor" method="post" acceptcharset="utf-8">
+									<input type="hidden" name="author" value="${tfg.author}" />
+									<input type="submit" value="Rechazar como tutor" />
+							</form>
+								</td>
+							</form>
+						</c:if>
 					</c:when>
 					<c:when test="${tfg.status == 2}">
 						<td><c:out value="${tfg.secretary }" /></td>
 						<td></td>
 					</c:when>
-					<c:when test="${tfg.status ge 3}">
+					<c:when test="${tfg.status == 3 }">
+						<td><c:out value="${tfg.secretary }" /></td>
+						<td>
+						<form action="/file" method="get">
+							<input id="author" name="author" type="hidden"
+								value="${tfg.author}" /> <input type="submit"
+								value="Mostrar memoria" />
+						</form>
+						<c:if test="${tfg.rejected == false}">
+						<form action="/accept?role=tutor" method="post">
+							<input id="author" name="author" type="hidden"
+								value="${tfg.author}" /> <input type="submit"
+								value="Aceptar memoria" />
+						</form>
+						<form action="/reject?role=tutor" method="post">
+							<input id="author" name="author" type="hidden"
+								value="${tfg.author}" /> <input type="submit"
+								value="Rechazar memoria" />
+						</form>
+						</c:if>
+						</td>
+					</c:when>
+					<c:when test="${tfg.status ge 4}">
 						<td><c:out value="${tfg.secretary }" /></td>
 						<td>
 						<form action="/file" method="get">
@@ -69,17 +99,24 @@
 				<td><c:out value="${tfg.summary}" /></td>
 				<td><c:out value="${tfg.tutor}" /></td>
 				<td><c:choose>
-						<c:when test="${tfg.status == 3}">
+						<c:when test="${tfg.status == 4}">
 							<form action="/file" method="get">
 								<input id="author" name="author" type="hidden"
 									value="${tfg.author}" /> <input type="submit"
 									value="Mostrar memoria" />
 							</form>
+							<c:if test="${tfg.rejected == false}">
 							<form action="/accept?role=secretary" method="post" acceptcharset="utf-8">
 								<input id="author" name="author" type="hidden"
 									value="${tfg.author}" /> <input type="submit"
-									value="Aceptar como secretario" />
+									value="Aprobar" />
 							</form>
+							<form action="/reject?role=secretary" method="post" acceptcharset="utf-8">
+								<input id="author" name="author" type="hidden"
+									value="${tfg.author}" /> <input type="submit"
+									value="Suspender" />
+							</form>
+							</c:if>
 						</c:when>
 						<c:when test="${tfg.status == 4}">
 							<form action="/file" method="get">
