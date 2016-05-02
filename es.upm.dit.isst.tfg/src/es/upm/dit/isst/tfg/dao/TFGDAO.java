@@ -14,7 +14,7 @@ import es.upm.dit.isst.tfg.model.TFG;
 public interface TFGDAO {
 	
 	//CREATE methods
-	public void createTFG(String author, String title, String summary,
+	public TFG createTFG(String author, String title, String summary,
 			String tutor, String secretary, String file, int status, boolean rejected);
 
 	//READ methods

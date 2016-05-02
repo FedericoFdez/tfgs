@@ -32,7 +32,7 @@ public class TFGDAOImpl implements TFGDAO {
 	 * @see es.upm.dit.isst.tfg.dao.TFGDAO#createTFG(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	public void createTFG(String author, String title, String summary,
+	public TFG createTFG(String author, String title, String summary,
 			String tutor, String secretary, String file, int status, boolean rejected) {
 		EntityManager em = EMFService.get().createEntityManager();
 		
@@ -40,6 +40,7 @@ public class TFGDAOImpl implements TFGDAO {
 		em.persist(tfg);
 		
 		em.close();
+		return tfg;
 	}
 
 	/* (non-Javadoc)
@@ -138,8 +139,12 @@ public class TFGDAOImpl implements TFGDAO {
 	 */
 	@Override
 	public void deleteTFG(TFG tfg) {
-		EntityManager em = EMFService.get().createEntityManager();		
-		em.remove(tfg);
+		EntityManager em = EMFService.get().createEntityManager();
+		
+		Query q = em.createQuery("SELECT i from TFG i where author = :author", TFG.class);
+		q.setParameter("author", tfg.getAuthor());
+		TFG storedTFG = (TFG)(q.getResultList().get(0));
+		em.remove(storedTFG);
 		em.close();
 	}
 
